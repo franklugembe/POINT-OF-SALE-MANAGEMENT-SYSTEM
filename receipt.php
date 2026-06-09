@@ -1,0 +1,6 @@
+﻿<?php require_once 'header.php';
+$id=$_GET['id']??0; $s=$pdo->prepare('SELECT s.*, c.name customer, u.full_name cashier FROM sales s LEFT JOIN customers c ON c.id=s.customer_id JOIN users u ON u.id=s.user_id WHERE s.id=?'); $s->execute([$id]); $sale=$s->fetch(); if(!$sale) die('Receipt haipo.');
+$it=$pdo->prepare('SELECT si.*, p.name product FROM sale_items si JOIN products p ON p.id=si.product_id WHERE si.sale_id=?'); $it->execute([$id]); $items=$it->fetchAll();
+?>
+<div class="receipt panel" id="receipt"><h1><?= e(setting('business_name','FRANK POS')) ?></h1><p><?= e(setting('phone')) ?> <?= e(setting('address')) ?></p><hr><p><b>Risiti:</b> <?= e($sale['receipt_no']) ?></p><p><b>Tarehe:</b> <?= e($sale['sale_date']) ?></p><p><b>Mteja:</b> <?= e($sale['customer'] ?? 'Walk-in Customer') ?></p><p><b>Cashier:</b> <?= e($sale['cashier']) ?></p><table><tr><th>Bidhaa</th><th>Qty</th><th>Bei</th><th>Total</th></tr><?php foreach($items as $r): ?><tr><td><?= e($r['product']) ?></td><td><?= e($r['quantity']) ?></td><td><?= money($r['price']) ?></td><td><?= money($r['total']) ?></td></tr><?php endforeach; ?></table><h2>Jumla: <?= money($sale['total_amount']) ?></h2></div><button onclick="window.print()">Print Receipt</button>
+<?php require_once 'footer.php'; ?>

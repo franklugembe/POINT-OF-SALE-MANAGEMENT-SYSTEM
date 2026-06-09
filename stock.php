@@ -1,0 +1,7 @@
+﻿<?php require_once 'header.php';
+if($_SERVER['REQUEST_METHOD']==='POST'){ $change=(int)$_POST['quantity']; if($_POST['type']==='remove') $change=-$change; $pdo->prepare('UPDATE products SET quantity=quantity+? WHERE id=?')->execute([$change,$_POST['product_id']]); flash('success','Stock imebadilishwa.'); header('Location: stock.php'); exit; }
+$products=$pdo->query('SELECT p.*, c.name category, s.low_stock_level FROM products p LEFT JOIN categories c ON c.id=p.category_id CROSS JOIN settings s ORDER BY p.quantity ASC')->fetchAll();
+?>
+<h1>Stock Management</h1><form class="panel grid-form" method="post"><select name="product_id" required><?php foreach($products as $p): ?><option value="<?= e($p['id']) ?>"><?= e($p['name']) ?> (<?= e($p['quantity']) ?>)</option><?php endforeach; ?></select><select name="type"><option value="add">Ongeza stock</option><option value="remove">Punguza stock</option></select><input type="number" name="quantity" min="1" placeholder="Quantity" required><button>Update Stock</button></form>
+<div class="panel"><table><tr><th>Product</th><th>Category</th><th>Stock</th><th>Status</th></tr><?php foreach($products as $p): ?><tr><td><?= e($p['name']) ?></td><td><?= e($p['category']) ?></td><td><?= e($p['quantity']) ?></td><td><?= $p['quantity'] <= $p['low_stock_level'] ? '<span class="badge danger-bg">Low Stock</span>' : '<span class="badge ok-bg">OK</span>' ?></td></tr><?php endforeach; ?></table></div>
+<?php require_once 'footer.php'; ?>
