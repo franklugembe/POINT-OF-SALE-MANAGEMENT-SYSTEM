@@ -1,15 +1,15 @@
-#Point of Sale Management System(POS)
-##Overview
+# Point of Sale Management System(POS)
+## Overview
 POS System This is a system for managing sales, inventory (stock), customers, and business users. It is designed to help businesses track products, record sales, issue receipts, and generate various reports easily.
 
-##Features
+## Features
 Authentication
 User Registration (Create Account)
 User Login
 Forgot Password
 Secure Logout
 
- ##Dashboard
+ ## Dashboard
 Total Products
 Total Sales
 Total Customers
@@ -24,26 +24,26 @@ Delete Products
 Search Products
 View Product List
 
- ##Category Management
+ ## Category Management
 Add Categories
 Edit Categories
 Delete Categories
 View Categories
 
- ##Customer Management
+ ## Customer Management
 Add Customers
 Update Customer Information
 Delete Customers
 Search Customers
 
 
- ##Sales Management
+ ## Sales Management
 Create Sales Transactions
 Automatic Price Calculation
 Generate Receipts
 Store Sales Records
 
-##Stock Management
+## Stock Management
 Add Stock
 Update Stock
 Monitor Inventory Levels
@@ -56,13 +56,13 @@ Monthly Sales Reports
 Best Selling Products
 Profit Reports
 
-##User Management
+## User Management
 Add Users
 Manage User Roles
 Update User Information
 Delete Users
 
-##Technologies Used
+## Technologies Used
 HTML
 CSS
 JavaScript
